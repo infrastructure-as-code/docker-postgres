@@ -1,8 +1,6 @@
 FROM postgres:alpine
 
-COPY build.sh /
+COPY generate-ssl-certs.sh /docker-entrypoint-initdb.d/
 RUN \
-  /build.sh && \
-  rm build.sh
-
-CMD ["postgres", "-cssl=on", "-cssl_cert_file=/data/ssl/certs/server.crt", "-cssl_key_file=/data/ssl/certs/server.key"]
+  apk add --no-cache \
+    openssl
