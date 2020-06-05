@@ -1,7 +1,5 @@
 #!/bin/sh
-set -euo pipefail
-
-whoami
+set -eu
 
 SSL_DOMAIN=${SSL_DOMAIN:="pg.local"}
 SSL_DAYS=${SSL_DAYS:=3650}
@@ -27,7 +25,7 @@ ssl_prefer_server_ciphers = on
 ssl_ciphers = 'HIGH:MEDIUM:+3DES:!aNULL'
 " >> "${PGDATA}/postgresql.conf"
 
-if [[ "${SSL_ONLY}" == "true" ]]; then
+if [ "${SSL_ONLY}" == "true" ]; then
   echo "Enforcing SSL-only client connections"
   sed -i -e 's/^host all all all/hostssl all all all/' "${PGDATA}/pg_hba.conf"
 fi
