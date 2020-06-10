@@ -5,17 +5,19 @@ The [official Postgres image](https://hub.docker.com/_/postgres) comes without a
 
 ## Automated Builds
 
-[![DockerHub Badge](http://dockeri.co/image/infrastructureascode/postgres)](https://hub.docker.com/r/infrastructureascode/postgres/)
+[![DockerHub Badge](https://dockeri.co/image/infrastructureascode/postgres)](https://hub.docker.com/r/infrastructureascode/postgres/)
 
 In order to ensure the provenance of the images, all images are automatically built on [Docker Hub]()'s infrastructure with every push to this repo, as well as when the base Postgres images are updated.
 
 ## Supported Tags and Respective Dockerfiles
 
-* [`9.5-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/Dockerfile-9.5)
-* [`9.6-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/Dockerfile-9.6)
-* [`10-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/Dockerfile-10)
-* [`11-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/Dockerfile-11)
-* [`12-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/Dockerfile-12)
+
+* [`9.5`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/9.5/Dockerfile), [`9.5-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/9.5-alpine/Dockerfile)
+* [`9.6`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/9.6/Dockerfile), [`9.6-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/9.6-alpine/Dockerfile)
+* [`10`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/10/Dockerfile), [`10-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/10-alpine/Dockerfile)
+* [`11`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/11/Dockerfile), [`11-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/11-alpine/Dockerfile)
+* [`12`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/12/Dockerfile), [`12-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/12-alpine/Dockerfile)
+* [`13`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/13/Dockerfile), [`13-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/13-alpine/Dockerfile)
 
 
 ## Usage
