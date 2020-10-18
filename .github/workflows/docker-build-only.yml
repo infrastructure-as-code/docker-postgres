@@ -70,8 +70,8 @@ jobs:
       - name: Build image
         uses: docker/build-push-action@v1
         with:
-          context: .
-          file: ${{ matrix.distro }}.Dockerfile
+          path: .
+          dockerfile: ${{ matrix.distro }}.Dockerfile
           build_args: base_image=postgres:${{ matrix.version }}
           push: false
           tags: ${{ env.IMAGE }}:${{ matrix.version }}
