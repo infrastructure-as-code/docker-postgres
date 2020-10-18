@@ -1,4 +1,4 @@
-name: Docker Images
+name: Build & Test Images
 on:
   - push
   - pull_request
