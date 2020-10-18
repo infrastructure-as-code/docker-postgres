@@ -14,8 +14,42 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        distro: [alpine, debian]
-        pg_version: [9.5, 9.6, 10, 11, 12, 13]
+        include:
+          - distro: alpine
+            version: "9.5-alpine"
+
+          - distro: alpine
+            version: "9.6-alpine"
+
+          - distro: alpine
+            version: "10-alpine"
+
+          - distro: alpine
+            version: "11-alpine"
+
+          - distro: alpine
+            version: "12-alpine"
+
+          - distro: alpine
+            version: "13-alpine"
+
+          - distro: debian
+            version: "9.5"
+
+          - distro: debian
+            version: "9.6"
+
+          - distro: debian
+            version: "10"
+
+          - distro: debian
+            version: "11"
+
+          - distro: debian
+            version: "12"
+
+          - distro: debian
+            version: "13"
     steps:
       - uses: actions/checkout@v2
 
@@ -42,32 +76,15 @@ jobs:
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
 
-      - name: Build and push alpine images
-        if: ${{ matrix.distro == 'alpine' }}
+      - name: Build and push images
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ${{ matrix.distro }}.Dockerfile
-          build-args: base_image=postgres:${{ matrix.pg_version }}-alpine
+          build-args: base_image=postgres:${{ matrix.version }}
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v6
           push: true
-          tags: ${{ env.IMAGE }}:${{ matrix.pg_version }}-alpine
+          tags: ${{ env.IMAGE }}:${{ matrix.version }}
 
       - name: Inspect images
-        if: ${{ matrix.distro == 'alpine' }}
-        run: docker buildx imagetools inspect ${{ env.IMAGE }}:${{ matrix.pg_version }}-alpine
-
-      - name: Build and push debian images
-        if: ${{ matrix.distro == 'debian' }}
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ${{ matrix.distro }}.Dockerfile
-          build-args: base_image=postgres:${{ matrix.pg_version }}
-          platforms: linux/amd64,linux/arm64/v8,linux/arm/v6
-          push: true
-          tags: ${{ env.IMAGE }}:${{ matrix.pg_version }}
-
-      - name: Inspect images
-        if: ${{ matrix.distro == 'debian' }}
-        run: docker buildx imagetools inspect ${{ env.IMAGE }}:${{ matrix.pg_version }}
+        run: docker buildx imagetools inspect ${{ env.IMAGE }}:${{ matrix.version }}
