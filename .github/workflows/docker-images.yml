@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{ matrix.distro }}/${{ matrix.pg_version }}-alpine
-          file: ./Dockerfile
+          file: ${{ matrix.distro }}/${{ matrix.pg_version }}-alpine/Dockerfile
           #platforms: linux/amd64,linux/arm64/v8,linux/arm/v6
           platforms: linux/amd64
           push: true
