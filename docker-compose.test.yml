@@ -32,7 +32,7 @@ services:
           ;
         \"
         export PGSSLMODE=disable
-        psql --expanded --command=\"
+        ! psql --expanded --command=\"
           SELECT 1;
-        \" || true
+        \"
       "
