@@ -51,22 +51,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up QEMU
-        id: qemu
-        uses: docker/setup-qemu-action@v1
-        with:
-          image: tonistiigi/binfmt:latest
-          platforms: all
-
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v1
-        with:
-          version: latest
-
-      - name: Available platforms
-        run: echo ${{ steps.buildx.outputs.platforms }}
-
       - name: Build image
         uses: docker/build-push-action@v1
         with:
@@ -74,7 +58,8 @@ jobs:
           dockerfile: ${{ matrix.distro }}.Dockerfile
           build_args: base_image=postgres:${{ matrix.version }}
           push: false
-          tags: ${{ env.IMAGE }}:${{ matrix.version }}
+          repository: ${{ env.IMAGE }}
+          tags: ${{ matrix.version }}
 
       - run: docker images
 
