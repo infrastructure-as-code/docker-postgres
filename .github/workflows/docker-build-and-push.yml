@@ -77,15 +77,23 @@ jobs:
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
 
-      - name: Build and push images
+      - name: Build image
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ${{ matrix.distro }}.Dockerfile
           build-args: base_image=postgres:${{ matrix.version }}
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v6
-          push: true
+          push: false
           tags: ${{ env.IMAGE }}:${{ matrix.version }}
 
-      - name: Inspect images
+      - name: Test alpine image
+        env:
+          IMAGE: ${{ env.IMAGE }}:${{ matrix.version }}
+        run: docker-compose -f docker-compose.test.yml run sut
+
+      - name: Push image
+        run: docker push ${{ env.IMAGE }}:${{ matrix.version }}
+
+      - name: Inspect image
         run: docker buildx imagetools inspect ${{ env.IMAGE }}:${{ matrix.version }}
