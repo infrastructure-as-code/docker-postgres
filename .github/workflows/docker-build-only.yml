@@ -75,6 +75,7 @@ jobs:
           build-args: base_image=postgres:${{ matrix.version }}
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v6
           push: false
+          load: true
           tags: ${{ env.IMAGE }}:${{ matrix.version }}
 
       - run: docker images
