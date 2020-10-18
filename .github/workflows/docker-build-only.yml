@@ -41,6 +41,12 @@ jobs:
           push: false
           tags: ${{ env.IMAGE }}:${{ matrix.pg_version }}-alpine
 
+      - name: Test alpine image
+        if: ${{ matrix.distro == 'alpine' }}
+        env:
+          IMAGE: ${{ env.IMAGE }}:${{ matrix.pg_version }}-alpine
+        run: docker-compose -f docker-compose.test.yml run sut
+
       - name: Build debian images
         if: ${{ matrix.distro == 'debian' }}
         uses: docker/build-push-action@v2
@@ -51,3 +57,9 @@ jobs:
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v6
           push: false
           tags: ${{ env.IMAGE }}:${{ matrix.pg_version }}
+
+      - name: Test debian image
+        if: ${{ matrix.distro == 'debian' }}
+        env:
+          IMAGE: ${{ env.IMAGE }}:${{ matrix.pg_version }}
+        run: docker-compose -f docker-compose.test.yml run sut
