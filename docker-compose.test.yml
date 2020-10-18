@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+  server:
+    image: ${IMAGE}
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: verysecurepassword123
+      SSL_ONLY: "true"
+
+  sut:
+    image: ${IMAGE}
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: verysecurepassword123
+      PGHOST: server
+      PGAPPNAME: sut
+    depends_on:
+    - server
+    command: |
+      /bin/bash -eux -c "
+        sleep 20
+        export PGSSLMODE=require
+        pg_isready --timeout=300
+        psql --expanded --command=\"
+          SELECT
+            b.*
+          FROM
+            pg_stat_activity AS a INNER JOIN
+            pg_stat_ssl AS b on a.pid = b.pid
+          WHERE
+            a.application_name = 'sut'
+          ;
+        \"
+        export PGSSLMODE=disable
+        psql --expanded --command=\"
+          SELECT 1;
+        \" || true
+      "
