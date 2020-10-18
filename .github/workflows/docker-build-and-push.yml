@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - ghcr
   schedule:
     # build a new set of images daily at 00:30hrs UTC so that we quickly
     # get updates from upstream images.
