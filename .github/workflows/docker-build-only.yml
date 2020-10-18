@@ -45,6 +45,9 @@ jobs:
 
           - distro: debian
             version: "13"
+
+          - distro: debian
+            version: latest
     steps:
       - uses: actions/checkout@v2
 
