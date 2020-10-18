@@ -77,6 +77,8 @@ jobs:
           push: false
           tags: ${{ env.IMAGE }}:${{ matrix.version }}
 
+      - run: docker images
+
       - name: Test alpine image
         env:
           IMAGE: ${{ env.IMAGE }}:${{ matrix.version }}
