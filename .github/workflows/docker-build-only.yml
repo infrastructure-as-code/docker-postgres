@@ -53,7 +53,7 @@ jobs:
 
       - name: Build image
         run: docker build --rm -f ${{ matrix.distro }}.Dockerfile
-               --build-args base_image=postgres:${{ matrix.version }}
+               --build-arg base_image=postgres:${{ matrix.version }}
                --tag ${{ env.IMAGE }}:${{ matrix.version }}
                .
 
