@@ -1,23 +1,30 @@
 # Postgres Docker Image with Self-Signed SSL Certs
 
-The [official Postgres image](https://hub.docker.com/_/postgres) comes without any SSL certificates, leaving users to create the functionality for themselves.  The [infrastructureascode/postgres](https://hub.docker.com/repository/docker/infrastructureascode/postgres) Docker image create here aims to add SSL support by using self-signed SSL certificates.
+The [official Postgres image](https://hub.docker.com/_/postgres) comes without any SSL certificates, leaving users to create the functionality for themselves.  This image (`ghcr.io/infrastructure-as-code/postgres`) strives to provide that missing functionality by using self-signed SSL certificates.
 
 
 ## Automated Builds
 
-[![DockerHub Badge](https://dockeri.co/image/infrastructureascode/postgres)](https://hub.docker.com/r/infrastructureascode/postgres/)
+In order to ensure the provenance of the images, all images are automatically built and pushed by [GitHub Actions](https://github.com/features/actions) with every push to the `main` branch of this repo, as well as on a daily basis at 00:00hrs UTC so that we get all the upstream updates to the `postgres` image.
 
-In order to ensure the provenance of the images, all images are automatically built on [Docker Hub]()'s infrastructure with every push to this repo, as well as when the base Postgres images are updated.
+
+## Multiarch
+
+Images are built for the following architecture.
+
+1. amd64
+1. arm32v6
+1. arm64v8
+
 
 ## Supported Tags and Respective Dockerfiles
 
-
-* [`9.5`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/9.5/Dockerfile), [`9.5-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/9.5-alpine/Dockerfile)
-* [`9.6`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/9.6/Dockerfile), [`9.6-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/9.6-alpine/Dockerfile)
-* [`10`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/10/Dockerfile), [`10-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/10-alpine/Dockerfile)
-* [`11`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/11/Dockerfile), [`11-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/11-alpine/Dockerfile)
-* [`12`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/12/Dockerfile), [`12-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/12-alpine/Dockerfile)
-* [`13`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian/13/Dockerfile), [`13-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine/13-alpine/Dockerfile)
+* [`9.5`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`9.5-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
+* [`9.6`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`9.6-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
+* [`10`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`10-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
+* [`11`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`11-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
+* [`12`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`12-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
+* [`13`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`13-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
 
 
 ## Usage
@@ -27,7 +34,7 @@ Starting a container.
 ```
 docker run --rm -it \
   -e POSTGRES_PASSWORD=password \
-  infrastructureascode/postgres:11-alpine
+  ghcr.io/infrastructure-as-code/postgres:11-alpine
 ```
 
 ## Environment Variables

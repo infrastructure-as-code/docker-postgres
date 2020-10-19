@@ -1,16 +1,14 @@
 version: "3.7"
 services:
   server:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: ${IMAGE}
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: verysecurepassword123
       SSL_ONLY: "true"
 
   sut:
-    image: postgres:10
+    image: ${IMAGE}
     environment:
       PGUSER: postgres
       PGPASSWORD: verysecurepassword123
@@ -20,7 +18,7 @@ services:
     - server
     command: |
       /bin/bash -eux -c "
-        sleep 10
+        sleep 20
         export PGSSLMODE=require
         pg_isready --timeout=300
         psql --expanded --command=\"
@@ -34,7 +32,7 @@ services:
           ;
         \"
         export PGSSLMODE=disable
-        psql --expanded --command=\"
+        ! psql --expanded --command=\"
           SELECT 1;
-        \" || true
+        \"
       "

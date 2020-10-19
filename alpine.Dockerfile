@@ -1,4 +1,5 @@
-FROM postgres:9.5-alpine
+ARG base_image
+FROM ${base_image}
 
 RUN \
   apk add --no-cache \

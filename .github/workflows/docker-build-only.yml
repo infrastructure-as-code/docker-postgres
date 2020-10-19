@@ -1,0 +1,63 @@
+name: Build & Test Images
+on:
+  - push
+  - pull_request
+env:
+  IMAGE: ghcr.io/${{ github.repository_owner }}/postgres
+jobs:
+  build-only:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - distro: alpine
+            version: "9.5-alpine"
+
+          - distro: alpine
+            version: "9.6-alpine"
+
+          - distro: alpine
+            version: "10-alpine"
+
+          - distro: alpine
+            version: "11-alpine"
+
+          - distro: alpine
+            version: "12-alpine"
+
+          - distro: alpine
+            version: "13-alpine"
+
+          - distro: debian
+            version: "9.5"
+
+          - distro: debian
+            version: "9.6"
+
+          - distro: debian
+            version: "10"
+
+          - distro: debian
+            version: "11"
+
+          - distro: debian
+            version: "12"
+
+          - distro: debian
+            version: "13"
+
+          - distro: debian
+            version: latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build --rm -f ${{ matrix.distro }}.Dockerfile
+               --build-arg base_image=postgres:${{ matrix.version }}
+               --tag ${{ env.IMAGE }}:${{ matrix.version }}
+               .
+
+      - name: Test alpine image
+        env:
+          IMAGE: ${{ env.IMAGE }}:${{ matrix.version }}
+        run: docker-compose -f docker-compose.test.yml run sut

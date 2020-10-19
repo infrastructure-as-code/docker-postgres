@@ -1,4 +1,5 @@
-FROM postgres:11
+ARG base_image
+FROM ${base_image}
 
 RUN \
   export DEBIAN_FRONTEND=noninteractive && \
