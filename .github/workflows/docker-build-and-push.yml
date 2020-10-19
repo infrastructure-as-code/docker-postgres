@@ -57,6 +57,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # build locally first before the multiarch build with buildx
+      - name: Build image
+        run: docker build --rm -f ${{ matrix.distro }}.Dockerfile
+               --build-arg base_image=postgres:${{ matrix.version }}
+               --tag ${{ env.IMAGE }}:${{ matrix.version }}
+               .
+
+      - name: Test alpine image
+        env:
+          IMAGE: ${{ env.IMAGE }}:${{ matrix.version }}
+        run: docker-compose -f docker-compose.test.yml run sut
+
+      # if we get here, the test passed, so let's buildx and push
       - name: Login to GitHub Packages Docker Registry
         uses: docker/login-action@v1
         with:
@@ -87,16 +100,8 @@ jobs:
           file: ${{ matrix.distro }}.Dockerfile
           build-args: base_image=postgres:${{ matrix.version }}
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v6
-          push: false
+          push: true
           tags: ${{ env.IMAGE }}:${{ matrix.version }}
-
-      - name: Test alpine image
-        env:
-          IMAGE: ${{ env.IMAGE }}:${{ matrix.version }}
-        run: docker-compose -f docker-compose.test.yml run sut
-
-      - name: Push image
-        run: docker push ${{ env.IMAGE }}:${{ matrix.version }}
 
       - name: Inspect image
         run: docker buildx imagetools inspect ${{ env.IMAGE }}:${{ matrix.version }}
