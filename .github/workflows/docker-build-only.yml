@@ -52,16 +52,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build image
-        uses: docker/build-push-action@v1
-        with:
-          path: .
-          dockerfile: ${{ matrix.distro }}.Dockerfile
-          build_args: base_image=postgres:${{ matrix.version }}
-          push: false
-          repository: ${{ env.IMAGE }}
-          tags: ${{ matrix.version }}
-
-      - run: docker images
+        run: docker build --rm -f ${{ matrix.distro }}.Dockerfile
+               --build-args base_image=postgres:${{ matrix.version }}
+               --tag ${{ env.IMAGE }}:${{ matrix.version }}
 
       - name: Test alpine image
         env:
