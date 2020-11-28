@@ -3,7 +3,7 @@ set -eu
 
 SSL_DOMAIN=${SSL_DOMAIN:="pg.local"}
 SSL_DAYS=${SSL_DAYS:=3650}
-SSL_ONLY=${SSL_ALLOW_NON_SSL:="true"}
+SSL_ONLY=${SSL_ONLY:="true"}
 
 echo "Generating self-signed SSL certificates valid for ${SSL_DAYS} days with ${SSL_DOMAIN} domain"
 openssl req -new -x509 -days ${SSL_DAYS} -nodes -text \
