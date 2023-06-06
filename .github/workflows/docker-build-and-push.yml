@@ -13,6 +13,7 @@ on:
     # get updates from upstream images.
     - cron: "30 0 * * 0"
 env:
+  REGISTRY: ghcr.io
   IMAGE: ghcr.io/${{ github.repository_owner }}/postgres
   #BASE_IMAGE: public.ecr.aws/docker/library/postgres
   BASE_IMAGE: postgres
