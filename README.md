@@ -19,7 +19,7 @@ Images are built for the following architecture.
 
 ## Supported Tags and Respective Dockerfiles
 
-* [`11`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`11-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
+* [`11-bullseye`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`11-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
 * [`12`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`12-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
 * [`13`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`13-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
 * [`14`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`14-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
@@ -33,7 +33,7 @@ Starting a container.
 ```
 docker run --rm -it \
   -e POSTGRES_PASSWORD=password \
-  ghcr.io/infrastructure-as-code/postgres:11-alpine
+  ghcr.io/infrastructure-as-code/postgres:15-alpine
 ```
 
 ## Environment Variables

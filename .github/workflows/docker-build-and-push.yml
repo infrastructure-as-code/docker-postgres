@@ -1,14 +1,14 @@
 name: Build & Push Images
 on:
-  push:
-    branches:
-      - main
+  - push
+  - pull_request
   schedule:
     # build a new set of images daily at 00:30hrs UTC so that we quickly
     # get updates from upstream images.
     - cron: '30 0 * * *'
 env:
   IMAGE: ghcr.io/${{ github.repository_owner }}/postgres
+  BASE_IMAGE: public.ecr.aws/docker/library/postgres
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
             version: "15-alpine"
 
           - distro: debian
-            version: "11"
+            version: "11-bullseye"
 
           - distro: debian
             version: "12"
@@ -53,7 +53,7 @@ jobs:
       # build locally first before the multiarch build with buildx
       - name: Build image
         run: docker build --rm -f ${{ matrix.distro }}.Dockerfile
-               --build-arg base_image=postgres:${{ matrix.version }}
+               --build-arg base_image=${{ env.BASE_IMAGE }}:${{ matrix.version }}
                --tag ${{ env.IMAGE }}:${{ matrix.version }}
                .
 
@@ -91,9 +91,9 @@ jobs:
         with:
           context: .
           file: ${{ matrix.distro }}.Dockerfile
-          build-args: base_image=postgres:${{ matrix.version }}
+          build-args: base_image=${{ env.BASE_IMAGE }}:${{ matrix.version }}
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v6
-          push: true
+          push: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
           tags: ${{ env.IMAGE }}:${{ matrix.version }}
 
       - name: Inspect image

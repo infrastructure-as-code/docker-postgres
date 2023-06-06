@@ -4,6 +4,7 @@ on:
   - pull_request
 env:
   IMAGE: ghcr.io/${{ github.repository_owner }}/postgres
+  BASE_IMAGE: public.ecr.aws/docker/library/postgres
 jobs:
   build-only:
     runs-on: ubuntu-latest
@@ -26,7 +27,7 @@ jobs:
             version: "15-alpine"
 
           - distro: debian
-            version: "11"
+            version: "11-bullseye"
 
           - distro: debian
             version: "12"
@@ -47,7 +48,7 @@ jobs:
 
       - name: Build image
         run: docker build --rm -f ${{ matrix.distro }}.Dockerfile
-               --build-arg base_image=postgres:${{ matrix.version }}
+               --build-arg base_image=${{ env.BASE_IMAGE }}:${{ matrix.version }}
                --tag ${{ env.IMAGE }}:${{ matrix.version }}
                .
 
