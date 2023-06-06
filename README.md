@@ -19,12 +19,11 @@ Images are built for the following architecture.
 
 ## Supported Tags and Respective Dockerfiles
 
-* [`9.5`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`9.5-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
-* [`9.6`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`9.6-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
-* [`10`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`10-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
 * [`11`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`11-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
 * [`12`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`12-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
 * [`13`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`13-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
+* [`14`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`14-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
+* [`15`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`15-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
 
 
 ## Usage
