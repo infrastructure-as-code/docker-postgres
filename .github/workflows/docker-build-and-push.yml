@@ -2,28 +2,30 @@ name: Build & Push Images
 on:
   push:
     branches:
-      - main
+      - "main"
+      - "dev"
+      - "dev/*"
+  pull_request:
+    branches:
+      - "main"
   schedule:
     # build a new set of images daily at 00:30hrs UTC so that we quickly
     # get updates from upstream images.
-    - cron: '30 0 * * *'
+    - cron: "30 0 * * 0"
 env:
+  REGISTRY: ghcr.io
   IMAGE: ghcr.io/${{ github.repository_owner }}/postgres
+  #BASE_IMAGE: public.ecr.aws/docker/library/postgres
+  BASE_IMAGE: postgres
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     strategy:
       matrix:
         include:
-          - distro: alpine
-            version: "9.5-alpine"
-
-          - distro: alpine
-            version: "9.6-alpine"
-
-          - distro: alpine
-            version: "10-alpine"
-
           - distro: alpine
             version: "11-alpine"
 
@@ -33,17 +35,14 @@ jobs:
           - distro: alpine
             version: "13-alpine"
 
-          - distro: debian
-            version: "9.5"
+          - distro: alpine
+            version: "14-alpine"
+
+          - distro: alpine
+            version: "15-alpine"
 
           - distro: debian
-            version: "9.6"
-
-          - distro: debian
-            version: "10"
-
-          - distro: debian
-            version: "11"
+            version: "11-bullseye"
 
           - distro: debian
             version: "12"
@@ -52,14 +51,20 @@ jobs:
             version: "13"
 
           - distro: debian
+            version: "14"
+
+          - distro: debian
+            version: "15"
+
+          - distro: debian
             version: latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # build locally first before the multiarch build with buildx
       - name: Build image
         run: docker build --rm -f ${{ matrix.distro }}.Dockerfile
-               --build-arg base_image=postgres:${{ matrix.version }}
+               --build-arg base_image=${{ env.BASE_IMAGE }}:${{ matrix.version }}
                --tag ${{ env.IMAGE }}:${{ matrix.version }}
                .
 
@@ -69,23 +74,23 @@ jobs:
         run: docker-compose -f docker-compose.test.yml run sut
 
       # if we get here, the test passed, so let's buildx and push
-      - name: Login to GitHub Packages Docker Registry
-        uses: docker/login-action@v1
+      - name: Log in to the container registry
+        uses: docker/login-action@v2
         with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up QEMU
         id: qemu
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
         with:
           image: tonistiigi/binfmt:latest
           platforms: all
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
         with:
           version: latest
 
@@ -93,14 +98,15 @@ jobs:
         run: echo ${{ steps.buildx.outputs.platforms }}
 
       - name: Build image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: ${{ matrix.distro }}.Dockerfile
-          build-args: base_image=postgres:${{ matrix.version }}
+          build-args: base_image=${{ env.BASE_IMAGE }}:${{ matrix.version }}
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v6
-          push: true
+          push: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
           tags: ${{ env.IMAGE }}:${{ matrix.version }}
 
       - name: Inspect image
         run: docker buildx imagetools inspect ${{ env.IMAGE }}:${{ matrix.version }}
+        if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
