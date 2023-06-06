@@ -1,7 +1,11 @@
 name: Build & Push Images
 on:
-  - push
-  - pull_request
+  push:
+    - main
+    - dev
+    - dev/*
+  pull_request:
+    - *
   schedule:
     # build a new set of images daily at 00:30hrs UTC so that we quickly
     # get updates from upstream images.
