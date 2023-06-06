@@ -1,13 +1,13 @@
 name: Build & Push Images
 on:
   push:
-    - main
-    - dev
-    - dev/*
+    - "main"
+    - "dev"
+    - "dev/*"
   schedule:
     # build a new set of images daily at 00:30hrs UTC so that we quickly
     # get updates from upstream images.
-    - cron: '30 0 * * *'
+    - cron: "30 0 * * 0"
 env:
   IMAGE: ghcr.io/${{ github.repository_owner }}/postgres
   #BASE_IMAGE: public.ecr.aws/docker/library/postgres
