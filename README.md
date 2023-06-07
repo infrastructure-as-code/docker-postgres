@@ -1,12 +1,14 @@
+[![GHCR Build Status](https://github.com/infrastructure-as-code/docker-postgres/actions/workflows/ghcr.yml/badge.svg?branch=main)](https://github.com/infrastructure-as-code/docker-postgres/actions/workflows/ghcr.yml)
+[![Docker Hub Build Status](https://github.com/infrastructure-as-code/docker-postgres/actions/workflows/dockerhub.yml/badge.svg?branch=main)](https://github.com/infrastructure-as-code/docker-postgres/actions/workflows/dockerhub.yml)
+
+
 # Postgres Docker Image with Self-Signed SSL Certs
 
-The [official Postgres image](https://hub.docker.com/_/postgres) comes without any SSL certificates, leaving users to create the functionality for themselves.  This image (`ghcr.io/infrastructure-as-code/postgres`) strives to provide that missing functionality by using self-signed SSL certificates.
-
+The [official Postgres image](https://hub.docker.com/_/postgres) comes without any SSL certificates, leaving users to create the functionality for themselves.  This image strives to provide that missing functionality by using self-signed SSL certificates.  It is available on both GitHub Container Register (`ghcr.io`) and Docker Hub (`hub.docker.com`).
 
 ## Automated Builds
 
-In order to ensure the provenance of the images, all images are automatically built and pushed by [GitHub Actions](https://github.com/features/actions) with every push to the `main` branch of this repo, as well as on a daily basis at 00:00hrs UTC so that we get all the upstream updates to the `postgres` image.
-
+In order to ensure the provenance of the images, all images are automatically built and pushed by [GitHub Actions](https://github.com/features/actions) with every push to the `main` branch of this repo.  Weekly builds are kicked off on Saturdays at 00:30 UTC so that we get all the upstream updates to the `postgres` image.
 
 ## Multiarch
 
@@ -16,14 +18,20 @@ Images are built for the following architecture.
 1. arm32v6
 1. arm64v8
 
+## Images
+
+| Registry Name | Image Name |
+|---------------|------------|
+| GitHub Container Registry | `ghcr.io/infrastructure-as-code/postgres` |
+| Docker Hub | `infrastructureascode/postgres` |
 
 ## Supported Tags and Respective Dockerfiles
 
-* [`11-bullseye`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`11-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
-* [`12`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`12-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
-* [`13`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`13-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
-* [`14`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`14-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
-* [`15`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/debian.Dockerfile), [`15-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/master/alpine.Dockerfile)
+* [`11-bullseye`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`11-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
+* [`12`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`12-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
+* [`13`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`13-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
+* [`14`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`14-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
+* [`15`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`15-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
 
 
 ## Usage

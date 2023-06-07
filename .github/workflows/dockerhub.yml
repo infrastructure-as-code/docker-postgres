@@ -6,9 +6,9 @@ on:
       - "dev"
       - "dev/*"
   schedule:
-    # build a new set of images daily at 00:30hrs UTC so that we quickly
+    # build a new set of images weekly at 00:30hrs UTC so that we quickly
     # get updates from upstream images.
-    - cron: "30 0 * * 0"
+    - cron: "30 0 * * 6"
 
 env:
   IMAGE: infrastructureascode/postgres

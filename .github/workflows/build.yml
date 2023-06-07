@@ -1,4 +1,4 @@
-name: Build & Test Images
+name: Local Build & Test
 on:
   - push
   - pull_request
