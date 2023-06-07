@@ -23,7 +23,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-      metadata: write
     strategy:
       matrix:
         include:
