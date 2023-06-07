@@ -1,4 +1,4 @@
-name: Build & Push Images
+name: GHCR
 on:
   push:
     branches:
