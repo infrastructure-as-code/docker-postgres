@@ -7,6 +7,7 @@ on:
     # build a new set of images daily at 00:30hrs UTC so that we quickly
     # get updates from upstream images.
     - cron: "30 0 * * 0"
+
 env:
   IMAGE: infrastructureascode/postgres
   BASE_IMAGE: postgres
@@ -96,9 +97,10 @@ jobs:
           file: ${{ matrix.distro }}.Dockerfile
           build-args: base_image=${{ env.BASE_IMAGE }}:${{ matrix.version }}
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v6
-          push: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+          push: true
+          #push: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
           tags: ${{ env.IMAGE }}:${{ matrix.version }}
 
       - name: Inspect image
         run: docker buildx imagetools inspect ${{ env.IMAGE }}:${{ matrix.version }}
-        if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+        #if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
