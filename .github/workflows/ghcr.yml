@@ -24,9 +24,6 @@ jobs:
       matrix:
         include:
           - distro: alpine
-            version: "11-alpine"
-
-          - distro: alpine
             version: "12-alpine"
 
           - distro: alpine
@@ -38,8 +35,8 @@ jobs:
           - distro: alpine
             version: "15-alpine"
 
-          - distro: debian
-            version: "11-bullseye"
+          - distro: alpine
+            version: "16-alpine"
 
           - distro: debian
             version: "12"
@@ -52,6 +49,9 @@ jobs:
 
           - distro: debian
             version: "15"
+
+          - distro: debian
+            version: "16"
 
           - distro: debian
             version: latest
