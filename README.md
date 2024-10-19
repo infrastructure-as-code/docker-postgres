@@ -27,7 +27,6 @@ Images are built for the following architecture.
 
 ## Supported Tags and Respective Dockerfiles
 
-* [`12`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`12-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
 * [`13`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`13-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
 * [`14`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`14-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
 * [`15`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`15-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
