@@ -4,18 +4,20 @@ versions = \
 	alpine
 
 alpine_tags = \
-	11-alpine \
 	12-alpine \
 	13-alpine \
 	14-alpine \
+	15-alpine \
+	16-alpine \
 	15-alpine
 
 debian_tags = \
-	11-bullseye \
 	12 \
 	13 \
 	14 \
-	15
+	15 \
+	16 \
+	17
 
 all: $(alpine_tags) $(debian_tags)
 

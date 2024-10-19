@@ -13,9 +13,6 @@ jobs:
       matrix:
         include:
           - distro: alpine
-            version: "12-alpine"
-
-          - distro: alpine
             version: "13-alpine"
 
           - distro: alpine
@@ -27,8 +24,8 @@ jobs:
           - distro: alpine
             version: "16-alpine"
 
-          - distro: debian
-            version: "12"
+          - distro: alpine
+            version: "17-alpine"
 
           - distro: debian
             version: "13"
@@ -43,6 +40,9 @@ jobs:
             version: "16"
 
           - distro: debian
+            version: "17"
+
+          - distro: debian
             version: latest
     steps:
       - uses: actions/checkout@v3
@@ -53,7 +53,10 @@ jobs:
                --tag ${{ env.IMAGE }}:${{ matrix.version }}
                .
 
+      - name: Install Docker Compose
+        uses: withlogicco/setup-compose-cli@v1
+
       - name: Test alpine image
         env:
           IMAGE: ${{ env.IMAGE }}:${{ matrix.version }}
-        run: docker-compose -f docker-compose.test.yml run sut
+        run: docker compose -f docker-compose.test.yml run sut
