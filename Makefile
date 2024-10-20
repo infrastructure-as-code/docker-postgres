@@ -4,15 +4,13 @@ versions = \
 	alpine
 
 alpine_tags = \
-	12-alpine \
 	13-alpine \
 	14-alpine \
 	15-alpine \
 	16-alpine \
-	15-alpine
+	17-alpine
 
 debian_tags = \
-	12 \
 	13 \
 	14 \
 	15 \
@@ -34,7 +32,7 @@ build:
 		--file $(distro).Dockerfile \
 		--build-arg base_image=public.ecr.aws/docker/library/postgres:$(version) \
 		.
-	IMAGE=$(tag) docker-compose -f docker-compose.test.yml run sut
-	IMAGE=$(tag) docker-compose -f docker-compose.test.yml down
+	IMAGE=$(tag) docker compose -f docker-compose.test.yml run sut
+	IMAGE=$(tag) docker compose -f docker-compose.test.yml down
 
 .PHONY: $(alpine_tags) $(debian_tags)
