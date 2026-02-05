@@ -38,6 +38,9 @@ jobs:
           - distro: alpine
             version: "17-alpine"
 
+          - distro: alpine
+            version: "18-alpine"
+
           - distro: debian
             version: "13"
 
@@ -54,9 +57,12 @@ jobs:
             version: "17"
 
           - distro: debian
+            version: "18"
+
+          - distro: debian
             version: latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       # build locally first before the multiarch build with buildx
       - name: Build image
@@ -75,7 +81,7 @@ jobs:
 
       # if we get here, the test passed, so let's buildx and push
       - name: Log in to the container registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -83,14 +89,14 @@ jobs:
 
       - name: Set up QEMU
         id: qemu
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
         with:
           image: tonistiigi/binfmt:latest
           platforms: all
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
         with:
           version: latest
 
@@ -98,7 +104,7 @@ jobs:
         run: echo ${{ steps.buildx.outputs.platforms }}
 
       - name: Build image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ${{ matrix.distro }}.Dockerfile
