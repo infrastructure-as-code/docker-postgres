@@ -32,6 +32,7 @@ Images are built for the following architecture.
 * [`15`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`15-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
 * [`16`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`16-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
 * [`17`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`17-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
+* [`18`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/debian.Dockerfile), [`18-alpine`](https://github.com/infrastructure-as-code/docker-postgres/blob/main/alpine.Dockerfile)
 
 
 ## Usage
