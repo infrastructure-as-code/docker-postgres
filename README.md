@@ -16,6 +16,7 @@ Images are built for the following architecture.
 
 1. amd64
 1. arm32v6
+1. arm32v7
 1. arm64v8
 
 ## Images
