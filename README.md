@@ -43,7 +43,7 @@ Starting a container.
 ```
 docker run --rm -it \
   -e POSTGRES_PASSWORD=password \
-  ghcr.io/infrastructure-as-code/postgres:15-alpine
+  ghcr.io/infrastructure-as-code/postgres:18-alpine
 ```
 
 ## Environment Variables
